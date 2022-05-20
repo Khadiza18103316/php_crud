@@ -108,6 +108,7 @@ $connect =mysqli_connect("localhost","root", "", "php_crud");
             <th>Phone</th>
             <th>Dept</th>
             <th>Edit</th>
+            <th>Delete</th>
 
             <?php
         $read = "SELECT * FROM insert_data";
@@ -121,7 +122,9 @@ $connect =mysqli_connect("localhost","root", "", "php_crud");
                 <td><?php echo $row["password"]; ?></td>
                 <td><?php echo $row["phone"]; ?></td>
                 <td><?php echo $row["dept"]; ?></td>
-                <td><a href="edit.php?idNo=<?php echo $row['id'] ?>">Edit</a></td>
+                <td><a href="edit.php?idNo=<?php echo $row['id'];?>">Edit</a></td>
+                <td><a onclick="return confirm('Are You Sure?')"
+                        href="delete.php?idNo=<?php echo $row['id'];?>">Delete</a></td>
             </tr>
             <?php  }
        ?>
