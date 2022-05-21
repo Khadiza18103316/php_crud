@@ -14,17 +14,25 @@ $connect =mysqli_connect("localhost","root", "", "php_crud");
       $phone=$_POST['phone'];
       $dept=$_POST['dept'];
 
-      $query = "INSERT INTO insert_data(name,email,password,phone,dept) VALUES ('$name','$email','$password','$phone','$dept')";
+      //Email Validation
+      $email_select = "SELECT * FROM insert_data WHERE Email = '$email' ";
+      $exc = mysqli_query($connect, $email_select);
+      $count = mysqli_num_rows($exc);
+      if($count>0){
+        echo"<script>alert('Email already exist')</script>";
+      }else{
+        $query = "INSERT INTO insert_data(name,email,password,phone,dept) VALUES ('$name','$email','$password','$phone','$dept')";
 
-      $insert = mysqli_query($connect,$query);
-
-      if($insert){
-          echo"<script>alert('Data send success')</script>";
+        $insert = mysqli_query($connect,$query);
+  
+        if($insert){
+            echo"<script>alert('Data send success')</script>";
+        }
+        else{
+          echo"<script>alert('Data send failed')</script>";
       }
-      else{
-        echo"<script>alert('Data send failed')</script>";
-    }
 
+      }  
   }
 
 ?>
@@ -109,10 +117,15 @@ $connect =mysqli_connect("localhost","root", "", "php_crud");
             <th>Dept</th>
             <th>Edit</th>
             <th>Delete</th>
-
             <?php
+
         $read = "SELECT * FROM insert_data";
+
         $query = mysqli_query($connect, $read);
+
+        $count = mysqli_num_rows($query);
+        echo "<h3>total database row : </h3>" . $count;
+        
 
         while($row = mysqli_fetch_array($query)){ ?>
             <tr>
