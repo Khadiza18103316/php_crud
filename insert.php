@@ -18,7 +18,7 @@ $connect =mysqli_connect("localhost","root", "", "php_crud");
       $email_select = "SELECT * FROM insert_data WHERE Email = '$email' ";
       $exc = mysqli_query($connect, $email_select);
       $count = mysqli_num_rows($exc);
-      if($count>0){
+      if($count > 0){
         echo"<script>alert('Email already exist')</script>";
       }else{
         $query = "INSERT INTO insert_data(name,email,password,phone,dept) VALUES ('$name','$email','$password','$phone','$dept')";
